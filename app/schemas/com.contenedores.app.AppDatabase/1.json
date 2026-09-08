@@ -1,0 +1,544 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "d0527805d005b4a83e71344cb97ef964",
+    "entities": [
+      {
+        "tableName": "jornadas",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `fecha` TEXT NOT NULL, `inicio` TEXT NOT NULL, `fin` TEXT, `descansoMinutos` INTEGER NOT NULL, `odometroInicial` INTEGER NOT NULL, `odometroFinal` INTEGER, `observaciones` TEXT, `estado` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "inicio",
+            "columnName": "inicio",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fin",
+            "columnName": "fin",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "descansoMinutos",
+            "columnName": "descansoMinutos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odometroInicial",
+            "columnName": "odometroInicial",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "odometroFinal",
+            "columnName": "odometroFinal",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_jornadas_fecha",
+            "unique": true,
+            "columnNames": [
+              "fecha"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_jornadas_fecha` ON `${TABLE_NAME}` (`fecha`)"
+          }
+        ]
+      },
+      {
+        "tableName": "viajes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `jornadaId` TEXT NOT NULL, `numero` INTEGER NOT NULL, `inicio` TEXT NOT NULL, `fin` TEXT, `origenTexto` TEXT, `destinoTexto` TEXT, `kmViaje` REAL, `observaciones` TEXT, `estado` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "jornadaId",
+            "columnName": "jornadaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numero",
+            "columnName": "numero",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "inicio",
+            "columnName": "inicio",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fin",
+            "columnName": "fin",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "origenTexto",
+            "columnName": "origenTexto",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "destinoTexto",
+            "columnName": "destinoTexto",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "kmViaje",
+            "columnName": "kmViaje",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_viajes_jornadaId",
+            "unique": false,
+            "columnNames": [
+              "jornadaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_viajes_jornadaId` ON `${TABLE_NAME}` (`jornadaId`)"
+          },
+          {
+            "name": "index_viajes_jornadaId_numero",
+            "unique": true,
+            "columnNames": [
+              "jornadaId",
+              "numero"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_viajes_jornadaId_numero` ON `${TABLE_NAME}` (`jornadaId`, `numero`)"
+          }
+        ]
+      },
+      {
+        "tableName": "servicios",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `periodoFacturacionId` TEXT NOT NULL, `jornadaId` TEXT NOT NULL, `viajeId` TEXT NOT NULL, `numeroFacturacion` INTEGER, `inicio` TEXT NOT NULL, `fin` TEXT, `tipo` TEXT NOT NULL, `capacidad` INTEGER, `capacidadRetirada` INTEGER, `capacidadPuesta` INTEGER, `lugarId` TEXT, `direccion` TEXT, `latitud` REAL, `longitud` REAL, `placeId` TEXT, `tarifaCentimos` INTEGER, `importeCentimos` INTEGER, `observaciones` TEXT, `estado` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "periodoFacturacionId",
+            "columnName": "periodoFacturacionId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "jornadaId",
+            "columnName": "jornadaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "viajeId",
+            "columnName": "viajeId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numeroFacturacion",
+            "columnName": "numeroFacturacion",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "inicio",
+            "columnName": "inicio",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fin",
+            "columnName": "fin",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "capacidad",
+            "columnName": "capacidad",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "capacidadRetirada",
+            "columnName": "capacidadRetirada",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "capacidadPuesta",
+            "columnName": "capacidadPuesta",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "lugarId",
+            "columnName": "lugarId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "direccion",
+            "columnName": "direccion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "latitud",
+            "columnName": "latitud",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "longitud",
+            "columnName": "longitud",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "placeId",
+            "columnName": "placeId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tarifaCentimos",
+            "columnName": "tarifaCentimos",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "importeCentimos",
+            "columnName": "importeCentimos",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "observaciones",
+            "columnName": "observaciones",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_servicios_periodoFacturacionId_numeroFacturacion",
+            "unique": true,
+            "columnNames": [
+              "periodoFacturacionId",
+              "numeroFacturacion"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_servicios_periodoFacturacionId_numeroFacturacion` ON `${TABLE_NAME}` (`periodoFacturacionId`, `numeroFacturacion`)"
+          },
+          {
+            "name": "index_servicios_jornadaId",
+            "unique": false,
+            "columnNames": [
+              "jornadaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_servicios_jornadaId` ON `${TABLE_NAME}` (`jornadaId`)"
+          },
+          {
+            "name": "index_servicios_viajeId",
+            "unique": false,
+            "columnNames": [
+              "viajeId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_servicios_viajeId` ON `${TABLE_NAME}` (`viajeId`)"
+          },
+          {
+            "name": "index_servicios_periodoFacturacionId",
+            "unique": false,
+            "columnNames": [
+              "periodoFacturacionId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_servicios_periodoFacturacionId` ON `${TABLE_NAME}` (`periodoFacturacionId`)"
+          }
+        ]
+      },
+      {
+        "tableName": "periodos_facturacion",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `fechaInicio` TEXT NOT NULL, `fechaFin` TEXT NOT NULL, `estado` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaInicio",
+            "columnName": "fechaInicio",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaFin",
+            "columnName": "fechaFin",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_periodos_facturacion_fechaInicio",
+            "unique": true,
+            "columnNames": [
+              "fechaInicio"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_periodos_facturacion_fechaInicio` ON `${TABLE_NAME}` (`fechaInicio`)"
+          }
+        ]
+      },
+      {
+        "tableName": "tramos_tarifa",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `desdeServicio` INTEGER NOT NULL, `hastaServicio` INTEGER NOT NULL, `importeCentimos` INTEGER NOT NULL, `activo` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "desdeServicio",
+            "columnName": "desdeServicio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hastaServicio",
+            "columnName": "hastaServicio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importeCentimos",
+            "columnName": "importeCentimos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activo",
+            "columnName": "activo",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_tramos_tarifa_desdeServicio",
+            "unique": true,
+            "columnNames": [
+              "desdeServicio"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_tramos_tarifa_desdeServicio` ON `${TABLE_NAME}` (`desdeServicio`)"
+          }
+        ]
+      },
+      {
+        "tableName": "lugares",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `nombre` TEXT NOT NULL, `direccion` TEXT NOT NULL, `latitud` REAL, `longitud` REAL, `placeId` TEXT, `categoria` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "direccion",
+            "columnName": "direccion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitud",
+            "columnName": "latitud",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "longitud",
+            "columnName": "longitud",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "placeId",
+            "columnName": "placeId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "categoria",
+            "columnName": "categoria",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "vehiculos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `matricula` TEXT NOT NULL, `marca` TEXT, `modelo` TEXT, `odometroActual` INTEGER NOT NULL, `alturaMetros` REAL, `anchuraMetros` REAL, `longitudMetros` REAL, `pesoToneladas` REAL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "matricula",
+            "columnName": "matricula",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "marca",
+            "columnName": "marca",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "modelo",
+            "columnName": "modelo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "odometroActual",
+            "columnName": "odometroActual",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alturaMetros",
+            "columnName": "alturaMetros",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "anchuraMetros",
+            "columnName": "anchuraMetros",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "longitudMetros",
+            "columnName": "longitudMetros",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "pesoToneladas",
+            "columnName": "pesoToneladas",
+            "affinity": "REAL"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0527805d005b4a83e71344cb97ef964')"
+    ]
+  }
+}
